@@ -1,6 +1,6 @@
 window.AUCTION_CONFIG = {
-  supabaseUrl: "https://YOUR-PROJECT.supabase.co",
-  supabaseAnonKey: "YOUR-SUPABASE-ANON-KEY",
+  supabaseUrl: "https://zcnwilkhmbezwckzyaem.supabase.co",
+  supabaseAnonKey: "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6InpjbndpbGtobWJlendja3p5YWVtIiwicm9sZSI6ImFub24iLCJpYXQiOjE3ODY5NTMyNzQsImV4cCI6MjEwMjUyOTI3NH0.QNelxOVYq9w70F4xSu-1y2WisOzJb5_qB4lAo2fygis",
 
   golferName: "Sam Rawlings",
   golferDescription: "Blurb here",
