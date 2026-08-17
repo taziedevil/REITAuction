@@ -128,3 +128,68 @@ The public database view exposes only the highest bid amount.
 8. Test the admin sign-in and CSV export.
 9. Delete all test bid rows before launch.
 10. Test on a phone.
+
+## 7. Outbid email notifications with Resend
+
+This package now includes a Supabase Edge Function at:
+
+`supabase/functions/send-outbid-email/index.ts`
+
+It emails the previous highest bidder after a new bid is inserted. It does **not** email someone who outbids themselves using the same email address.
+
+### A. Set up Resend
+
+1. Create a Resend account.
+2. Add and verify the domain/address you want REIT to send from.
+3. Create a Resend API key.
+
+### B. Deploy the Edge Function
+
+Install/login to the Supabase CLI, link this project, then deploy:
+
+```bash
+supabase functions deploy send-outbid-email --no-verify-jwt
+```
+
+The function is intended to be called by a Supabase Database Webhook, not directly by auction visitors.
+
+### C. Add Edge Function secrets
+
+In Supabase Dashboard > Edge Functions > Secrets, add:
+
+- `RESEND_API_KEY` = your Resend API key
+- `AUCTION_FROM_EMAIL` = e.g. `REIT Golf Day <golfday@your-verified-domain.com>`
+- `AUCTION_URL` = the full public URL of the auction page
+
+`SUPABASE_URL` and `SUPABASE_SERVICE_ROLE_KEY` are available to hosted Supabase Edge Functions automatically. Never put the service-role key or Resend API key in `config.js`.
+
+### D. Create the Database Webhook
+
+In Supabase Dashboard:
+
+1. Go to **Database > Webhooks**.
+2. Create a new webhook.
+3. Name: `send-outbid-email`.
+4. Table: `public.auction_bids`.
+5. Event: **INSERT** only.
+6. Type: **Supabase Edge Functions**.
+7. Function: `send-outbid-email`.
+8. Save it.
+
+Now every accepted bid insert will trigger the function. The function finds the previous highest bidder and sends the outbid email through Resend.
+
+### E. Important if you change the bid increment
+
+The email function currently assumes the same **$50 minimum increment** used by this auction. If you change the increment, update this line in `supabase/functions/send-outbid-email/index.ts`:
+
+```ts
+const minimumNext = currentBid + 50;
+```
+
+### F. Test before launch
+
+1. Use bidder A/email A to place the first bid. No outbid email should be sent.
+2. Use bidder B/email B to place a higher bid. Bidder A should receive the email.
+3. Bid again using bidder B/email B. Bidder B should **not** receive an outbid email for outbidding themselves.
+4. Check **Edge Functions > Logs** in Supabase if an email does not arrive.
+5. Check Resend's email logs for delivery status.
