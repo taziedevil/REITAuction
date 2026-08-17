@@ -1,0 +1,77 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <title>REIT Auction Admin</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="styles.css" />
+  <style>
+    .admin-table-wrap { overflow-x:auto; }
+    table { width:100%; border-collapse:collapse; min-width:720px; }
+    th, td { padding:14px 12px; text-align:left; border-bottom:1px solid var(--line); }
+    th { font-size:12px; text-transform:uppercase; letter-spacing:.08em; color:var(--muted); }
+    .admin-actions { display:flex; gap:12px; flex-wrap:wrap; margin:18px 0; }
+    .admin-actions button { width:auto; padding:0 18px; }
+    .login-card { max-width:520px; margin:40px auto; }
+  </style>
+</head>
+<body>
+  <main class="page-shell">
+    <section class="hero">
+      <div class="hero-copy">
+        <div class="eyebrow">REIT Auction Administration</div>
+        <h1>Bid history</h1>
+        <p class="lead">Private view for auction administrators.</p>
+      </div>
+      <div class="golf-mark" aria-hidden="true">🔒</div>
+    </section>
+
+    <section id="loginPanel" class="card login-card">
+      <div class="bid-card">
+        <p class="mini-label">Administrator sign in</p>
+        <form id="loginForm">
+          <label>Email address
+            <input id="adminEmail" type="email" required autocomplete="email" />
+          </label>
+          <label>Password
+            <input id="adminPassword" type="password" required autocomplete="current-password" />
+          </label>
+          <button type="submit">Sign in</button>
+          <p id="adminMessage" class="form-message"></p>
+        </form>
+      </div>
+    </section>
+
+    <section id="adminPanel" class="card" hidden>
+      <div class="bid-card">
+        <div class="admin-actions">
+          <button id="refreshBtn" type="button">Refresh</button>
+          <button id="exportBtn" type="button">Export CSV</button>
+          <button id="signOutBtn" type="button">Sign out</button>
+        </div>
+
+        <div class="admin-table-wrap">
+          <table>
+            <thead>
+              <tr>
+                <th>Time</th>
+                <th>Name</th>
+                <th>Email</th>
+                <th>Bid</th>
+              </tr>
+            </thead>
+            <tbody id="bidRows"></tbody>
+          </table>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <script src="config.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+  <script src="admin.js"></script>
+</body>
+</html>

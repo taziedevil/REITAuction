@@ -1,0 +1,90 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <title>2026 REIT Mental Health Charity Golf Day Auction</title>
+  <meta name="description" content="Bid for the chance to have our featured golfer join your team at the 2026 REIT Mental Health Charity Golf Day." />
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="styles.css" />
+</head>
+<body>
+  <main class="page-shell">
+    <section class="hero">
+      <div class="hero-copy">
+        <div class="eyebrow">2026 REIT Mental Health Charity Golf Day</div>
+        <h1>Bid for a Golfer</h1>
+        <p class="lead">Win the chance to have our featured golfer join your team for the day.</p>
+      </div>
+      <div class="golf-mark" aria-hidden="true">⛳</div>
+    </section>
+
+    <section class="auction-grid">
+      <article class="card golfer-card">
+        <div class="golfer-photo-wrap">
+          <img id="golferPhoto" src="golfer-placeholder.svg" alt="Featured golfer" class="golfer-photo" />
+        </div>
+        <div class="card-body">
+          <p class="mini-label">Featured golfer</p>
+          <h2 id="golferName">Your Golfer Name</h2>
+          <p id="golferDescription" class="muted">
+            Add a short description here about the golfer, their background, and why bidders will want them on their team.
+          </p>
+        </div>
+      </article>
+
+      <article class="card bid-card">
+        <div id="statusPill" class="status-pill">Auction open</div>
+        <p class="mini-label">Current highest bid</p>
+        <div id="currentBid" class="current-bid">$0</div>
+        <p id="nextBidText" class="next-bid">Minimum next bid: $100</p>
+
+        <div class="divider"></div>
+
+        <form id="bidForm" novalidate>
+          <label>
+            Your name
+            <input id="bidderName" name="bidderName" type="text" autocomplete="name" maxlength="100" required />
+          </label>
+
+          <label>
+            Email address
+            <input id="bidderEmail" name="bidderEmail" type="email" autocomplete="email" maxlength="200" required />
+          </label>
+
+          <label>
+            Your bid
+            <div class="money-input">
+              <span>$</span>
+              <input id="bidAmount" name="bidAmount" type="number" inputmode="decimal" step="1" min="0" required />
+            </div>
+          </label>
+
+          <button id="submitBid" type="submit">Place bid</button>
+          <p id="formMessage" class="form-message" role="status" aria-live="polite"></p>
+        </form>
+
+        <div class="divider"></div>
+
+        <div class="close-info">
+          <span>Auction closes</span>
+          <strong id="closeTimeText">To be confirmed</strong>
+        </div>
+      </article>
+    </section>
+
+    <section class="fine-print">
+      <p>
+        Bidder names and email addresses are kept private and are only visible to REIT auction administrators.
+        The highest valid bid at the closing time will be treated as the winning bid. REIT will contact the winning bidder directly.
+      </p>
+    </section>
+  </main>
+
+  <script src="config.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+  <script src="app.js"></script>
+</body>
+</html>
