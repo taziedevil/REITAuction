@@ -11,7 +11,7 @@ window.AUCTION_CONFIG = {
 
   // Use an ISO timestamp with Tasmania's timezone offset.
   // Example: "2026-10-16T17:00:00+11:00"
-  auctionClosesAt: "2026-10-16T17:00:00+11:00",
+  auctionClosesAt: "2026-11-01T23:59:00+11:00",
 
   currency: "AUD"
 };
