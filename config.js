@@ -6,7 +6,7 @@ window.AUCTION_CONFIG = {
   golferDescription: "Bid for your chance to have Golf Pro Sam Rawlings join your team and be your 4th player!",
   golferPhoto: "golfer-placeholder.svg",
 
-  startingBid: 50,
+  startingBid: 20,
   minimumIncrement: 20,
 
   // Use an ISO timestamp with Tasmania's timezone offset.
