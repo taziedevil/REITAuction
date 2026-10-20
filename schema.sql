@@ -58,9 +58,9 @@ set search_path = public
 as $$
 declare
   v_highest numeric;
-  v_starting_bid numeric := 100;
-  v_increment numeric := 50;
-  v_close timestamptz := '2026-10-16T17:00:00+11:00';
+  v_starting_bid numeric := 50;
+  v_increment numeric := 20;
+  v_close timestamptz := '2026-11-16T17:00:00+11:00';
   v_required numeric;
 begin
   -- Lock the table for the short transaction so concurrent bids are evaluated in order.
